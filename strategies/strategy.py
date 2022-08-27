@@ -12,9 +12,10 @@ class Strategy:
         self.trend: Optional[int] = None
         self.time_frame = time_frame
         self.tradable_coins: [str] = None
-        self.indicators = {'trend': {'name': str, 'params': {str: int}},
-                           'momentum': {'name': str, 'params': {str: int}},
-                           'volatility' : {'name': str, 'params': {str: int}}}
+        self.indicators: {str: {{str: int}}} = {}
+            # {'trend': {'name': str, 'params': {str: int}},
+           # 'momentum': {'name': str, 'params': {str: int}},
+           #  'volatility': {'name': str, 'params': {str: int}}}
 
     def get_trend(self, df: pd.DataFrame, data, log_data: bool = False) -> int:
         """ gives the current trend
