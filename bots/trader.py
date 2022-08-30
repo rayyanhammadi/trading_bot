@@ -9,7 +9,7 @@ class Trader:
         self.starting_balance = starting_balance  # Balance we started bot with.
         self.balance = starting_balance  # USDT Balance.
         self.previous_net = starting_balance  # Our previous net will just be the starting balance in the beginning.
-        self.coin: dict = {}  # amount of coins we own
+        self.coin: dict = {str: float}  # amount of coins we own
         self.transaction_fee_percentage_decimal: float = 0.007  # Binance transaction fee percentage.
         self.tradable_coins: [str] = tradable_coins
         self.commissions_paid = 0  # Total commissions paid by this smart(?) trader
