@@ -1,21 +1,26 @@
 """ import dataset, indicators for backtesting """
+try:
+    import pandas as pd
+    import ta
+    import logging
+    from strategies.strategy import Strategy
+    from service.data_provider_service import Data
+    from utils.helpers import TechnicalAnalysis
+    from utils.consts import INTERVAL, SYMBOLS, INDICATORS
+except Exception as e:
+    print(e)
 
-import pandas as pd
-import ta
-import logging
-from strategies.strategy import Strategy
-from utils.helpers import TechnicalAnalysis
-from utils.consts import INTERVAL, SYMBOLS , TA_INDICATORS
 
+class HistoricalData(Data):
 
-class HistoricalData:
     """historical data provider"""
 
-    def __init__(self, data_frame):
-        self.df = data_frame
+    def __init__(self, data: Data):
+        super().__init__(client=data.client, interval=data.interval, symbol=data.symbol,
+                         start_date=data.start_date, end_date=data.end_date)
+
 
     def process_data(self):
-
         self.df = self.df.set_index(self.df['timestamp'])
         self.df.index = pd.to_datetime(self.df.index, unit='ms')
         self.df['close'] = pd.to_numeric(self.df['close'])
